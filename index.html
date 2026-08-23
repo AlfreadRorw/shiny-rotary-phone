@@ -43,6 +43,7 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
+    -webkit-tap-highlight-color:transparent;
 }
 
 html{
@@ -1190,8 +1191,9 @@ footer{
     align-items:center;
     justify-content:center;
     padding:20px;
-    background:rgba(0,0,0,.78);
+    background:rgba(0,0,0,.85);
     backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
     opacity:0;
     visibility:hidden;
     transition:.3s;
@@ -1204,6 +1206,8 @@ footer{
 
 .modal-box{
     width:min(440px,100%);
+    max-height:90vh;
+    overflow-y:auto;
     border:1px solid #353535;
     border-radius:23px;
     background:#0a0a0a;
@@ -1212,7 +1216,6 @@ footer{
         inset 0 1px 0 rgba(255,255,255,.05);
     transform:translateY(25px) scale(.96);
     transition:.4s var(--ease);
-    overflow:hidden;
 }
 
 .modal.active .modal-box{
@@ -1294,7 +1297,7 @@ footer{
     line-height:1.8;
 }
 
-.telegram-btn{
+.whatsapp-btn{
     width:100%;
     height:46px;
     margin-top:13px;
@@ -1310,11 +1313,61 @@ footer{
     font-size:10px;
     font-weight:900;
     transition:.25s;
+    text-decoration:none;
 }
 
-.telegram-btn:hover{
+.whatsapp-btn:hover{
     transform:translateY(-2px);
     box-shadow:0 15px 35px rgba(255,255,255,.12);
+}
+
+/* STEPPER POPUP UNTUK CANNEL WA */
+.step-box{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:15px;
+}
+
+.step-btn{
+    width:100%;
+    min-height:46px;
+    padding:10px 15px;
+    border:1px solid #333;
+    border-radius:11px;
+    background:#111;
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    cursor:pointer;
+    text-decoration:none;
+    transition:.25s;
+}
+
+.step-btn.primary{
+    background:#fff;
+    color:#000;
+    border-color:#fff;
+}
+
+.step-btn:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+    border-color:#222;
+    background:#080808;
+    color:#555;
+}
+
+.step-btn.unlocked{
+    opacity:1;
+    cursor:pointer;
+    background:#fff;
+    color:#000;
+    border-color:#fff;
 }
 
 /* ================= TOAST ================= */
@@ -1345,7 +1398,7 @@ footer{
     transform:translate(-50%,0);
 }
 
-/* ================= MOBILE ================= */
+/* ================= MOBILE OPTIMIZATION ================= */
 
 @media(max-width:900px){
 
@@ -1398,31 +1451,49 @@ footer{
     }
 
     .hero{
-        min-height:690px;
-        padding-top:120px;
+        min-height:640px;
+        padding-top:110px;
+        padding-bottom:60px;
     }
 
     .hero-orbit{
-        width:370px;
-        height:370px;
+        width:320px;
+        height:320px;
     }
 
     .hero h1{
-        font-size:51px;
-        letter-spacing:-4px;
+        font-size:44px;
+        letter-spacing:-3px;
     }
 
     .hero-description{
         font-size:11px;
         padding:0 10px;
+        line-height:1.6;
+    }
+
+    .hero-actions{
+        flex-direction:column;
+        width:100%;
+        max-width:280px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .btn{
+        width:100%;
     }
 
     .section{
-        padding:65px 0;
+        padding:55px 0;
     }
 
     .section-head{
         display:block;
+    }
+
+    .section-title{
+        font-size:26px;
     }
 
     .section-description{
@@ -1436,19 +1507,24 @@ footer{
     }
 
     .pricing{
-        gap:10px;
+        gap:12px;
     }
 
     .price-card{
-        padding:22px;
+        padding:20px;
     }
 
     .community-card{
         align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .community-action{
+        width:100%;
     }
 
     .code{
-        padding:20px;
+        padding:16px;
     }
 
     footer{
@@ -1458,6 +1534,10 @@ footer{
 
     .footer-links{
         margin-top:10px;
+    }
+
+    .modal-box{
+        border-radius:18px;
     }
 }
 
@@ -1647,9 +1727,7 @@ footer{
 
 
         <p class="section-description">
-            Salin loadstring dengan satu tombol. Sistem clipboard akan
-            menggunakan Clipboard API dan fallback untuk browser yang
-            membatasi akses clipboard.
+            Salin loadstring dengan satu tombol. Bergabunglah dengan Saluran WhatsApp kami untuk mendapatkan akses langsung menyalin script avatarclone.
         </p>
 
     </div>
@@ -1986,7 +2064,7 @@ footer{
         </div>
 
         <p class="section-description">
-            Pilih durasi akses. Setelah memilih, Telegram akan dibuka
+            Pilih durasi akses. Setelah memilih, WhatsApp akan dibuka
             dengan detail paket dan nominal yang sesuai.
         </p>
 
@@ -2031,7 +2109,8 @@ footer{
                     <svg class="icon icon-sm" viewBox="0 0 24 24">
                         <path d="M20 6L9 17l-5-5"/>
                     </svg>
-                    Telegram activation
+
+                    WhatsApp activation
                 </li>
 
             </ul>
@@ -2076,6 +2155,7 @@ footer{
                     <svg class="icon icon-sm" viewBox="0 0 24 24">
                         <path d="M20 6L9 17l-5-5"/>
                     </svg>
+
                     CloneBunker access
                 </li>
 
@@ -2083,7 +2163,8 @@ footer{
                     <svg class="icon icon-sm" viewBox="0 0 24 24">
                         <path d="M20 6L9 17l-5-5"/>
                     </svg>
-                    Telegram activation
+
+                    WhatsApp activation
                 </li>
 
             </ul>
@@ -2128,6 +2209,7 @@ footer{
                     <svg class="icon icon-sm" viewBox="0 0 24 24">
                         <path d="M20 6L9 17l-5-5"/>
                     </svg>
+
                     CloneBunker access
                 </li>
 
@@ -2135,7 +2217,8 @@ footer{
                     <svg class="icon icon-sm" viewBox="0 0 24 24">
                         <path d="M20 6L9 17l-5-5"/>
                     </svg>
-                    Telegram activation
+
+                    WhatsApp activation
                 </li>
 
             </ul>
@@ -2184,6 +2267,7 @@ footer{
                     <svg class="icon icon-sm" viewBox="0 0 24 24">
                         <path d="M20 6L9 17l-5-5"/>
                     </svg>
+
                     Premium features
                 </li>
 
@@ -2191,7 +2275,8 @@ footer{
                     <svg class="icon icon-sm" viewBox="0 0 24 24">
                         <path d="M20 6L9 17l-5-5"/>
                     </svg>
-                    Telegram activation
+
+                    WhatsApp activation
                 </li>
 
             </ul>
@@ -2230,8 +2315,7 @@ footer{
         </div>
 
         <p class="section-description">
-            Developer Telegram tersedia untuk pembelian key dan pertanyaan
-            mengenai CloneBunker. Channel WhatsApp akan tersedia kemudian.
+            Hubungi WhatsApp Developer untuk pembelian key dan bergabunglah dengan Saluran WhatsApp resmi kami untuk update terbaru.
         </p>
 
     </div>
@@ -2246,8 +2330,7 @@ footer{
                 <div class="community-icon">
 
                     <svg class="icon-lg" viewBox="0 0 24 24">
-                        <path d="M21 4L3 11l7 2 2 7 9-16z"/>
-                        <path d="M10 13l4 3"/>
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
                     </svg>
 
                 </div>
@@ -2255,11 +2338,11 @@ footer{
                 <div>
 
                     <h3>
-                        Developer Telegram
+                        Developer WhatsApp
                     </h3>
 
                     <p>
-                        @eIIyxx
+                        +62 838-3977-3499
                     </p>
 
                 </div>
@@ -2268,11 +2351,11 @@ footer{
 
 
             <a
-                href="https://t.me/eIIyxx"
+                href="https://wa.me/6283839773499"
                 target="_blank"
                 class="community-action">
 
-                Open
+                Chat
 
             </a>
 
@@ -2286,9 +2369,8 @@ footer{
                 <div class="community-icon">
 
                     <svg class="icon-lg" viewBox="0 0 24 24">
-                        <path d="M4 5h16v14H4z"/>
-                        <path d="M8 9h8"/>
-                        <path d="M8 13h5"/>
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
                     </svg>
 
                 </div>
@@ -2300,7 +2382,7 @@ footer{
                     </h3>
 
                     <p>
-                        Coming Soon
+                        Saluran Resmi CloneBunker
                     </p>
 
                 </div>
@@ -2308,13 +2390,14 @@ footer{
             </div>
 
 
-            <button
-                class="community-action"
-                disabled>
+            <a
+                href="https://whatsapp.com/channel/0029Vb8RrSQ9xVJdMEhYbu00"
+                target="_blank"
+                class="community-action">
 
-                Soon
+                Join
 
-            </button>
+            </a>
 
         </div>
 
@@ -2337,9 +2420,9 @@ footer{
         <a href="#pricing">Keys</a>
 
         <a
-            href="https://t.me/eIIyxx"
+            href="https://wa.me/6283839773499"
             target="_blank">
-            Telegram
+            WhatsApp
         </a>
 
     </div>
@@ -2397,21 +2480,103 @@ footer{
             <div class="purchase-note">
 
                 <p>
-                    Kamu akan diarahkan ke Telegram developer.
+                    Kamu akan diarahkan ke WhatsApp seller.
                     Detail paket dan nominal akan otomatis dimasukkan
                     ke pesan pembelian.
                 </p>
 
                 <button
-                    class="telegram-btn"
-                    onclick="goTelegram()">
+                    class="whatsapp-btn"
+                    onclick="goWhatsApp()">
 
                     <svg class="icon" viewBox="0 0 24 24">
-                        <path d="M21 4L3 11l7 2 2 7 9-16z"/>
-                        <path d="M10 13l4 3"/>
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
                     </svg>
 
-                    Continue to Telegram
+                    Continue to WhatsApp
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- WHATSAPP CHANNEL GATE MODAL (POPUP SALURAN) -->
+
+<div class="modal" id="channelModal">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h3>
+                Akses Loadstring AvatarClone
+            </h3>
+
+            <button
+                class="close"
+                onclick="closeChannelModal()">
+
+                <svg class="icon icon-sm" viewBox="0 0 24 24">
+                    <path d="M6 6l12 12"/>
+                    <path d="M18 6L6 18"/>
+                </svg>
+
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <div class="purchase-note">
+
+                <p style="color:#fff; font-weight:700; margin-bottom:6px;">
+                    Perhatian
+                </p>
+
+                <p>
+                    Utamakan bergabung dengan Saluran WhatsApp resmi kami terlebih dahulu untuk membuka kunci dan menyalin loadstring avatarclone.
+                </p>
+
+            </div>
+
+
+            <div class="step-box">
+
+                <a
+                    href="https://whatsapp.com/channel/0029Vb8RrSQ9xVJdMEhYbu00"
+                    target="_blank"
+                    class="step-btn primary"
+                    onclick="onJoinChannelClick()">
+
+                    <svg class="icon icon-sm" viewBox="0 0 24 24">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+
+                    1. Join Saluran WhatsApp
+
+                </a>
+
+
+                <button
+                    class="step-btn"
+                    id="btnCopyScriptModal"
+                    onclick="performCopy()"
+                    disabled>
+
+                    <svg class="icon icon-sm" viewBox="0 0 24 24">
+                        <rect x="9" y="9" width="10" height="10" rx="2"/>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                    </svg>
+
+                    2. Copy Loadstring Avatarclone
 
                 </button>
 
@@ -2448,10 +2613,12 @@ footer{
 const SCRIPT_TEXT =
 'loadstring(game:HttpGet("https://raw.githubusercontent.com/AlfreadRorw/CloneBunker/main/PhoneIDViewer/CloneBunker.lua"))()';
 
-const TELEGRAM_USERNAME = "eIIyxx";
+const WA_NUMBER = "6283839773499";
+const WA_CHANNEL_URL = "https://whatsapp.com/channel/0029Vb8RrSQ9xVJdMEhYbu00";
 
 let selectedPlan = "";
 let selectedPrice = "";
+let hasJoinedChannel = false;
 
 let toastTimer;
 
@@ -2496,10 +2663,38 @@ window.addEventListener("scroll",()=>{
 
 
 /* =========================================================
-   COPY
+   POPUP LOADSTRING & COPY LOGIC
 ========================================================= */
 
-async function copyScript(){
+function copyScript(){
+    openChannelModal();
+}
+
+function openChannelModal(){
+    document
+        .getElementById("channelModal")
+        .classList.add("active");
+}
+
+function closeChannelModal(){
+    document
+        .getElementById("channelModal")
+        .classList.remove("active");
+}
+
+function onJoinChannelClick(){
+    hasJoinedChannel = true;
+    const btn = document.getElementById("btnCopyScriptModal");
+    btn.removeAttribute("disabled");
+    btn.classList.add("unlocked");
+    showToast("Saluran dibuka! Klik tombol kedua untuk menyalin.");
+}
+
+async function performCopy(){
+    if(!hasJoinedChannel){
+        showToast("Harap join Saluran WhatsApp terlebih dahulu!");
+        return;
+    }
 
     try{
 
@@ -2526,8 +2721,8 @@ async function copyScript(){
 
     }
 
-    showToast("Loadstring copied");
-
+    showToast("Loadstring avatarclone berhasil disalin!");
+    closeChannelModal();
 }
 
 
@@ -2565,16 +2760,16 @@ function closePurchase(){
 
 
 /* =========================================================
-   TELEGRAM
+   WHATSAPP PURCHASE REDIRECT
 ========================================================= */
 
-function goTelegram(){
+function goWhatsApp(){
 
     const message =
         `Halo, saya ingin membeli ${selectedPlan} - ${selectedPrice}.`;
 
     const url =
-        `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(message)}`;
+        `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
 
     window.open(url,"_blank");
 
@@ -2597,9 +2792,21 @@ document
 
     });
 
+document
+    .getElementById("channelModal")
+    .addEventListener("click",(event)=>{
+
+        if(event.target === event.currentTarget){
+
+            closeChannelModal();
+
+        }
+
+    });
+
 
 /* =========================================================
-   ESC
+   ESC KEY
 ========================================================= */
 
 document.addEventListener("keydown",(event)=>{
@@ -2607,6 +2814,7 @@ document.addEventListener("keydown",(event)=>{
     if(event.key === "Escape"){
 
         closePurchase();
+        closeChannelModal();
 
     }
 
